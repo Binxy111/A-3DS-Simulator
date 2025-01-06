@@ -50,7 +50,7 @@ body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(30, 1fr);
   grid-gap: 5px;
   padding: 5px;
 }
@@ -104,8 +104,8 @@ body {
   <div class="bottom-screen">
     <div class="grid-container" id="app-grid"></div>
     <div class="grid-buttons">
-      <button class="grid-button" onclick="increaseGridHeight()">+</button>
-      <button class="grid-button" onclick="decreaseGridHeight()">-</button>
+      <button class="grid-button" onclick="increaseGridHeight()" onclick="increaseGridWidth()">⬛</button>
+      <button class="grid-button" onclick="decreaseGridHeight()" onclick="decreaseGridWidth()">◾</button>
     </div>
   </div>
 </div>
@@ -124,7 +124,7 @@ setInterval(() => {
 
 // Bottom Screen: App Grid
 const gridContainer = document.getElementById('app-grid');
-let gridHeight = 2; // Initial grid height
+let gridHeight = 1; let gridWidth = 2; // Initial grid height
 
 // Sample app data (replace with actual data)
 const apps = [
@@ -138,7 +138,7 @@ const apps = [
 
 function createGrid() {
   gridContainer.innerHTML = '';
-  const gridTemplateRows = `repeat(${gridHeight}, 1fr)`;
+  const gridTemplateRows = `repeat(${gridHeight}, 1fr) repeat(${gridWidth}, 1fr)`;
   gridContainer.style.gridTemplateRows = gridTemplateRows;
 
   apps.forEach((app) => {
