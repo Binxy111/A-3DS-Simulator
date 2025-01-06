@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3DS Simulator</title>
+<style>
+body {
+  background-color: #F0F0F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.3ds {
+  width: 400px;
+  height: 300px;
+  background-color: #E0E0E0;
+  border: 2px solid #C0C0C0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-screen {
+  width: 100%;
+  height: 160px;
+  background-color: #333;
+  border-bottom: 1px solid #222;
+}
+
+.status-bar {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: #FFF;
+}
+
+.battery {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #FFF;
+}
+
+.bottom-screen {
+  width: 100%;
+  height: 140px;
+  background-color: #FFF;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  padding: 5px;
+}
+
+.app, .empty-slot {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #CCC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  background-color: #E0E0E0;
+}
+
+.empty-slot {
+  background-color: #F0F0F0;
+}
+
+.app-name {
+  font-size: 10px;
+}
+
+.grid-buttons {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+
+.grid-button {
+  padding: 5px;
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+</style>
+</head>
+<body>
+
+<div class="3ds">
+  <div class="top-screen">
+    <div class="status-bar">
+      <span id="time"></span>
+    </div>
+    <div class="battery">
+      <span id="battery-level"></span>%
+    </div>
+  </div>
+  <div class="bottom-screen">
+    <div class="grid-container" id="app-grid"></div>
+    <div class="grid-buttons">
+      <button class="grid-button" onclick="increaseGridHeight()">+</button>
+      <button class="grid-button" onclick="decreaseGridHeight()">-</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Top Screen: Time and Battery
+setInterval(() => {
+  const now = new Date();
+  const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+  document.getElementById('time').textContent = timeString;
+
+  // Simulate battery level (replace with actual battery information)
+  const batteryLevel = Math.floor(Math.random() * 101); 
+  document.getElementById('battery-level').textContent = batteryLevel;
+}, 1000);
+
+// Bottom Screen: App Grid
+const gridContainer = document.getElementById('app-grid');
+let gridHeight = 2; // Initial grid height
+
+// Sample app data (replace with actual data)
+const apps = [
+  { name: 'Super Mario 3D Land' },
+  { name: 'Animal Crossing: New Leaf' },
+  { name: 'The Legend of Zelda: A Link Between Worlds' },
+  { name: 'Pokémon X/Y' },
+  { name: 'Mario Kart 7' },
+  // ... more apps
+];
+
+function createGrid() {
+  gridContainer.innerHTML = '';
+  const gridTemplateRows = `repeat(${gridHeight}, 1fr)`;
+  gridContainer.style.gridTemplateRows = gridTemplateRows;
+
+  apps.forEach((app) => {
+    const appElement = document.createElement('div');
+    appElement.classList.add('app');
+    appElement.draggable = true;
+    appElement.ondragstart = (event) => {
+      event.dataTransfer.setData('text/plain', ''); // Required for Firefox
+    };
+    appElement.innerHTML = `<span class="app-name">${app.name}</span>`;
+    gridContainer.appendChild(appElement);
+  });
+
+  for (let i = 0; i < gridHeight * 4 - apps.length; i++) {
+    const emptySlot = document.createElement('div');
+    emptySlot.classList.add('empty-slot');
+    gridContainer.appendChild(emptySlot);
+  }
+
+  // Make apps and empty slots draggable and droppable
+  const gridItems = gridContainer.children;
+  for (let i = 0; i < gridItems.length; i++) {
+    gridItems[i].addEventListener('dragover', (event) => {
+      event.preventDefault();
+    });
+
+    gridItems[i].addEventListener('drop', (event) => {
+      event.preventDefault();
+      const data = event.dataTransfer.getData('text/plain');
+      const draggedItem = document.querySelector('[data-dragged="true"]');
+      gridItems[i].appendChild(draggedItem);
+      draggedItem.removeAttribute('data-dragged');
+    });
+  }
+}
+
+function increaseGridHeight() {
+  gridHeight++;
+  createGrid();
+}
+
+function decreaseGridHeight() {
+  if (gridHeight > 1) {
+    gridHeight--;
+    createGrid();
+  }
+}
+
+createGrid();
+</script>
+
+</body>
+</html>
