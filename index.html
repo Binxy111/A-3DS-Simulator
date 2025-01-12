@@ -24,12 +24,22 @@ body {
   background-color: #000;
   border-bottom: 1px solid #ccc;
 }
-
+  
+#app-background {
+  width: 420px;
+  height: 220px;
+  position: absolute;
+  top: 120px;
+  left: 120px;
+  background-color: #E4E1D0;
+}
+  
 #bottom-screen {
   width: 400px;
   height: 240px;
   position: absolute;
   top: 120px;
+  background-color: #F2F3F5;
 }
 
 .icon {
@@ -38,7 +48,7 @@ body {
   margin: 10px;
   display: inline-block;
   border: 8px solid #F2F3F5;
-  border-radius: 10px;
+  border-radius: 13px;
 }
 
 </style>
@@ -49,7 +59,6 @@ body {
 
 <div id="3ds">
   <div id="top-screen">
-    <img alt="Top Screen" width="800" height="240">
 <script>
   setInterval(() => {
   const now = new Date();
@@ -58,8 +67,12 @@ body {
 </script>
   </div>
   <div id="bottom-screen">
-    <img alt="Bottom Screen" width="400" height="240"> 
-    <div style="margin-top: 20px;">
+   
+  </div>
+
+  <div id="3ds">
+  <div id="app-background">
+     <div style="margin-top: 20px;">
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-262.png" alt="Game 1">
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-158.png" alt="Game 2">
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-1271.png" alt="Game 3"> 
@@ -67,7 +80,8 @@ body {
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-673.png" alt="YouTube">
     </div>
   </div>
-</div>
-
+  </div>
+  </div>
+#E4E1D0
 </body>
 </html>
