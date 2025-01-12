@@ -49,13 +49,16 @@ body {
 
 <div id="3ds">
   <div id="top-screen">
-    <img alt="Top Screen" width="400" height="120">
+    <img alt="Top Screen" width="800" height="240">
 <script>
-  
+  setInterval(() => {
+  const now = new Date();
+  const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+  document.getElementById('time').textContent = timeString;
 </script>
   </div>
   <div id="bottom-screen">
-    <img src="https://th.bing.com/th/id/OIP.KLXj28OfrQ8dSmbGzK72XwHaHr?rs=1&pid=ImgDetMai" alt="Bottom Screen" width="501" height="520"> 
+    <img src="https://th.bing.com/th/id/OIP.KLXj28OfrQ8dSmbGzK72XwHaHr?rs=1&pid=ImgDetMai" alt="Bottom Screen" width="400" height="240"> 
     <div style="margin-top: 20px;">
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-262.png" alt="Game 1">
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-158.png" alt="Game 2">
