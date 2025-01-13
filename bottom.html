@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
 <title>Nintendo 3DS Simulator</title>
 <style>
@@ -74,7 +74,9 @@ body {
 
   <div id="3ds">
   <div id="app-background">
-     <div style="margin-top: 20px;">
+     <div class="container">
+  <div class="image-container">
+        <div style="margin-top: 20px;">
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-262.png" alt="Game 1">
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-158.png" alt="Game 2">
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-1271.png" alt="Game 3"> 
@@ -92,8 +94,36 @@ body {
       <img class="icon" src="https://www.vgmuseum.com/features/icons/3dsicons/3dsicons-673.png" alt="YouTube">
      </div>
   </div>
+  <div class="content">
+    </div>
+</div>
+<style>  
+.container {
+  position: relative; /* Allows absolute positioning of images */
+}
+
+.image-container {
+  position: absolute;
+  top: 0; /* Position images at the top */
+  left: 0; 
+  width: 100%; 
+  display: flex; /* For horizontal arrangement */
+  justify-content: space-between; /* Space images evenly */
+}
+
+.image-container img {
+  max-height: 200px; /* Adjust as needed */ 
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+.content {
+  padding-top: 200px; /* Adjust based on image height */ 
+  /* Other styles for your content */
+}
+  </style>
+
   </div>
   </div>
-#E4E1D0
+</div>
 </body>
 </html>
